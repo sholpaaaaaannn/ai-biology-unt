@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тест</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell narrow">
+    <header class="topbar">
+      <a href="index.html" class="back">← Басты бет</a>
+      <div class="badge" id="variantBadge">Нұсқа</div>
+    </header>
+
+    <h1>Биология тесті</h1>
+    <p class="lead">
+      1–30: бір дұрыс жауап. 31–35: сәйкестендіру. 36–40: бірнеше дұрыс жауап.
+    </p>
+
+    <form id="quizForm"></form>
+
+    <div class="actions">
+      <button class="btn primary" id="submitBtn" type="button">Жіберу</button>
+      <button class="btn" id="nextBtn" type="button" hidden>Келесі нұсқа</button>
+    </div>
+
+    <section class="result card" id="resultBox" hidden>
+      <h2>Нәтиже</h2>
+      <p id="scoreText"></p>
+    </section>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
