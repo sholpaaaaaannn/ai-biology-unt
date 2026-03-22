@@ -290,3 +290,22 @@ input[type="text"]{
     grid-template-columns:1fr;
   }
 }
+.correct-question{
+  border: 2px solid #22c55e;
+  background: #f0fdf4;
+}
+
+.wrong-question{
+  border: 2px solid #ef4444;
+  background: #fef2f2;
+}
+
+.question-result{
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid #e5e7eb;
+}
