@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI көмекші</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell narrow">
+    <header class="topbar">
+      <a href="index.html" class="back">← Басты бет</a>
+    </header>
+
+    <h1>AI көмекші</h1>
+
+    <div class="card">
+      <p>Сұрағыңды жаз. Бұл бет биология бойынша қысқа көмек береді.</p>
+      <textarea id="botInput" rows="5" placeholder="Мысалы: резус-конфликт деген не?"></textarea>
+
+      <div class="actions">
+        <button class="btn primary" id="askBotBtn" type="button">Жауап алу</button>
+      </div>
+
+      <div id="botOutput" class="bot-output"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
