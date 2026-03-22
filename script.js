@@ -1,4 +1,5 @@
-const VARIANTS = Object.keys(tests);
+const VARIANTS = typeof tests !== 'undefined' ? Object.keys(tests) : [];
+
 const variantLabels = {
   variant6: '6-нұсқа',
   variant8: '8-нұсқа',
@@ -18,7 +19,7 @@ function pickRandomVariant() {
   let used = getUsedVariants();
   let available = VARIANTS.filter(v => !used.includes(v));
 
-  if (!available.length) {
+  if (available.length === 0) {
     used = [];
     available = [...VARIANTS];
     setUsedVariants([]);
@@ -26,6 +27,7 @@ function pickRandomVariant() {
 
   const chosen = available[Math.floor(Math.random() * available.length)];
   used.push(chosen);
+
   setUsedVariants(used);
   localStorage.setItem('currentVariant', chosen);
 
@@ -33,13 +35,15 @@ function pickRandomVariant() {
 }
 
 function escapeHtml(str) {
-  return String(str).replace(/[&<>"']/g, s => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;'
-  }[s]));
+  return String(str).replace(/[&<>"']/g, function (s) {
+    return {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    }[s];
+  });
 }
 
 function renderQuestion(q) {
@@ -56,15 +60,23 @@ function renderQuestion(q) {
         <div class="q-number">${q.number}-сұрақ</div>
         <div class="q-type">${typeLabel}</div>
       </div>
+
       <div class="q-text">${escapeHtml(q.question)}</div>
   `;
 
   if (q.image) {
-    html += `<img class="q-image" src="${q.image}" alt="${q.number}-сұрақ суреті">`;
+    html += `
+      <img
+        class="q-image"
+        src="${q.image}"
+        alt="${q.number}-сұрақ суреті"
+      >
+    `;
   }
 
   if (q.type === 'single') {
     html += `<div class="options">`;
+
     q.options.forEach((opt, idx) => {
       html += `
         <label class="option">
@@ -73,6 +85,7 @@ function renderQuestion(q) {
         </label>
       `;
     });
+
     html += `</div>`;
   }
 
@@ -80,11 +93,11 @@ function renderQuestion(q) {
     html += `<div class="match-grid">`;
     html += `<div class="small">Әр қатарға дұрыс нөмірді таңда.</div>`;
 
-    if (q.choices?.length) {
+    if (q.choices && q.choices.length) {
       html += `
         <div class="small">
           Нұсқалар:
-          ${q.choices.map((c, i) => `${i + 1}) ${escapeHtml(c)}`).join(' | ')}
+          ${q.choices.map((choice, i) => `${i + 1}) ${escapeHtml(choice)}`).join(' | ')}
         </div>
       `;
     }
@@ -95,6 +108,7 @@ function renderQuestion(q) {
           <div class="option">
             <strong>${pair.label.toUpperCase()})</strong>&nbsp; ${escapeHtml(pair.text)}
           </div>
+
           <select name="q${q.number}_${pair.label}">
             <option value="">Таңда</option>
             ${q.choices.map((_, i) => `<option value="${i + 1}">${i + 1}</option>`).join('')}
@@ -108,6 +122,7 @@ function renderQuestion(q) {
 
   else if (q.type === 'multi') {
     html += `<div class="options">`;
+
     q.options.forEach((opt, idx) => {
       html += `
         <label class="option">
@@ -116,6 +131,7 @@ function renderQuestion(q) {
         </label>
       `;
     });
+
     html += `</div>`;
   }
 
@@ -124,7 +140,9 @@ function renderQuestion(q) {
 }
 
 function arraysEqual(a, b) {
-  return JSON.stringify([...a].sort((x, y) => x - y)) === JSON.stringify([...b].sort((x, y) => x - y));
+  const first = [...a].sort((x, y) => x - y);
+  const second = [...b].sort((x, y) => x - y);
+  return JSON.stringify(first) === JSON.stringify(second);
 }
 
 function markQuestionResult(qNumber, isCorrect, message) {
@@ -135,6 +153,7 @@ function markQuestionResult(qNumber, isCorrect, message) {
   card.classList.add(isCorrect ? 'correct-question' : 'wrong-question');
 
   let resultBox = card.querySelector('.question-result');
+
   if (!resultBox) {
     resultBox = document.createElement('div');
     resultBox.className = 'question-result';
@@ -157,6 +176,7 @@ function scoreQuiz(variant) {
 
       if (isCorrect) {
         score += 1;
+
         markQuestionResult(
           q.number,
           true,
@@ -181,6 +201,7 @@ function scoreQuiz(variant) {
     else if (q.type === 'matching') {
       const selectedPairs = q.pairs.map(pair => {
         const el = document.querySelector(`select[name="q${q.number}_${pair.label}"]`);
+
         return {
           label: pair.label,
           selected: el ? Number(el.value) : null,
@@ -188,20 +209,23 @@ function scoreQuiz(variant) {
         };
       });
 
-      const isCorrect = selectedPairs.every(p => p.selected === p.correct);
+      const isCorrect = selectedPairs.every(item => item.selected === item.correct);
 
       if (isCorrect) {
         score += 1;
+
         markQuestionResult(
           q.number,
           true,
           `<strong>Дұрыс.</strong> Сәйкестендіру толық дұрыс орындалды.`
         );
       } else {
-        const details = selectedPairs.map(p => {
-          const userText = p.selected ? p.selected : 'таңдалмады';
-          return `<div><strong>${p.label.toUpperCase()}</strong>: сіз — ${userText}, дұрыс — ${p.correct}</div>`;
-        }).join('');
+        const details = selectedPairs
+          .map(item => {
+            const userText = item.selected ? item.selected : 'таңдалмады';
+            return `<div><strong>${item.label.toUpperCase()}</strong>: сіз — ${userText}, дұрыс — ${item.correct}</div>`;
+          })
+          .join('');
 
         markQuestionResult(
           q.number,
@@ -229,6 +253,7 @@ function scoreQuiz(variant) {
 
       if (isCorrect) {
         score += 1;
+
         markQuestionResult(
           q.number,
           true,
@@ -251,12 +276,14 @@ function scoreQuiz(variant) {
 
 function saveResult(variant, score, max) {
   const results = JSON.parse(localStorage.getItem('results') || '[]');
+  const studentName = localStorage.getItem('studentName') || 'Аты көрсетілмеген';
 
   results.push({
-    variant,
+    studentName: studentName,
+    variant: variant,
     variantLabel: variantLabels[variant] || variant,
-    score,
-    max,
+    score: score,
+    max: max,
     date: new Date().toLocaleString()
   });
 
@@ -268,30 +295,59 @@ function initTestPage() {
   if (!form) return;
 
   const variant = pickRandomVariant();
-  document.getElementById('variantBadge').textContent = variantLabels[variant] || variant;
+  const studentName = localStorage.getItem('studentName') || 'Аты көрсетілмеген';
+
+  const variantBadge = document.getElementById('variantBadge');
+  if (variantBadge) {
+    variantBadge.textContent = variantLabels[variant] || variant;
+  }
+
+  const studentInfo = document.getElementById('studentInfo');
+  if (studentInfo) {
+    studentInfo.textContent = `Оқушы: ${studentName}`;
+  }
+
   form.innerHTML = tests[variant].map(renderQuestion).join('');
 
-  document.getElementById('submitBtn').addEventListener('click', () => {
-    const { score, max } = scoreQuiz(variant);
-    saveResult(variant, score, max);
+  const submitBtn = document.getElementById('submitBtn');
+  const nextBtn = document.getElementById('nextBtn');
 
-    const box = document.getElementById('resultBox');
-    box.hidden = false;
-    box.classList.toggle('good', score >= Math.round(max * 0.7));
-    box.classList.toggle('bad', score < Math.round(max * 0.7));
+  if (submitBtn) {
+    submitBtn.addEventListener('click', () => {
+      const result = scoreQuiz(variant);
 
-    document.getElementById('scoreText').textContent =
-      `${variantLabels[variant]} бойынша нәтиже: ${score} / ${max}`;
+      saveResult(variant, result.score, result.max);
 
-    document.getElementById('nextBtn').hidden = false;
+      const box = document.getElementById('resultBox');
+      const scoreText = document.getElementById('scoreText');
 
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: 'smooth'
+      if (box) {
+        box.hidden = false;
+        box.classList.remove('good', 'bad');
+        box.classList.add(result.score >= Math.round(result.max * 0.7) ? 'good' : 'bad');
+      }
+
+      if (scoreText) {
+        scoreText.textContent =
+          `${studentName} — ${variantLabels[variant]} бойынша нәтиже: ${result.score} / ${result.max}`;
+      }
+
+      if (nextBtn) {
+        nextBtn.hidden = false;
+      }
+
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      });
     });
-  });
+  }
 
-  document.getElementById('nextBtn').addEventListener('click', () => location.reload());
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      location.reload();
+    });
+  }
 }
 
 function initTeacherPage() {
@@ -302,25 +358,42 @@ function initTeacherPage() {
   const summary = document.getElementById('teacherSummary');
 
   if (!results.length) {
-    summary.innerHTML = '<h2>Әзірге нәтиже жоқ</h2><p class="small">Алдымен тестті орындап шық.</p>';
+    if (summary) {
+      summary.innerHTML = `
+        <h2>Әзірге нәтиже жоқ</h2>
+        <p class="small">Алдымен тестті орындап шық.</p>
+      `;
+    }
     list.innerHTML = '';
   } else {
-    const avg = (results.reduce((s, r) => s + r.score, 0) / results.length).toFixed(2);
+    const avg = (
+      results.reduce((sum, item) => sum + item.score, 0) / results.length
+    ).toFixed(2);
 
-    summary.innerHTML = `
-      <h2>Жалпы статистика</h2>
-      <p><strong>Тапсырылған тест саны:</strong> ${results.length}</p>
-      <p><strong>Орташа ұпай:</strong> ${avg}</p>
-    `;
+    const uniqueStudents = [...new Set(results.map(item => item.studentName))].length;
+
+    if (summary) {
+      summary.innerHTML = `
+        <h2>Жалпы статистика</h2>
+        <p><strong>Тапсырылған тест саны:</strong> ${results.length}</p>
+        <p><strong>Оқушылар саны:</strong> ${uniqueStudents}</p>
+        <p><strong>Орташа ұпай:</strong> ${avg}</p>
+      `;
+    }
 
     list.className = 'result-list';
-    list.innerHTML = results.slice().reverse().map(r => `
-      <div class="result-item">
-        <strong>${r.variantLabel}</strong>
-        <div>${r.score} / ${r.max}</div>
-        <div class="small">${r.date}</div>
-      </div>
-    `).join('');
+    list.innerHTML = results
+      .slice()
+      .reverse()
+      .map(item => `
+        <div class="result-item">
+          <strong>${item.studentName}</strong>
+          <div>Нұсқа: ${item.variantLabel}</div>
+          <div>Ұпай: ${item.score} / ${item.max}</div>
+          <div class="small">${item.date}</div>
+        </div>
+      `)
+      .join('');
   }
 
   const clearBtn = document.getElementById('clearResultsBtn');
@@ -328,6 +401,7 @@ function initTeacherPage() {
     clearBtn.addEventListener('click', () => {
       localStorage.removeItem('results');
       localStorage.removeItem('usedVariants');
+      localStorage.removeItem('studentName');
       location.reload();
     });
   }
@@ -338,7 +412,9 @@ function initBotPage() {
   if (!btn) return;
 
   btn.addEventListener('click', () => {
-    const text = (document.getElementById('botInput').value || '').toLowerCase();
+    const input = document.getElementById('botInput');
+    const output = document.getElementById('botOutput');
+    const text = (input ? input.value : '').toLowerCase();
 
     let answer =
       'Бұл тақырып бойынша қысқа түсіндірме: негізгі ұғымды анықтап, дұрыс терминді және механизмді есте сақта.';
@@ -360,7 +436,9 @@ function initBotPage() {
         'РНҚ құрамындағы көмірсу — рибоза. РНҚ-ның негізгі түрлері: аРНҚ, тРНҚ, рРНҚ.';
     }
 
-    document.getElementById('botOutput').textContent = answer;
+    if (output) {
+      output.textContent = answer;
+    }
   });
 }
 
