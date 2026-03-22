@@ -138,7 +138,7 @@ const tests = {
       ],
       "answer": 3,
       "page": 2,
-      "image": "assets/images/6_p2_img1.png"
+      "image": "6_p2_img1.png"
     },
     {
       "type": "single",
@@ -362,7 +362,7 @@ const tests = {
       ],
       "answer": 0,
       "page": 4,
-      "image": "assets/images/6_p3_img1.png"
+      "image": "6_p3_img1.png"
     },
     {
       "type": "single",
@@ -376,7 +376,7 @@ const tests = {
       ],
       "answer": 1,
       "page": 4,
-      "image": "assets/images/6_p3_img1.png"
+      "image": "6_p3_img1.png"
     },
     {
       "type": "single",
@@ -390,7 +390,7 @@ const tests = {
       ],
       "answer": 1,
       "page": 4,
-      "image": "assets/images/6_p3_img1.png"
+      "image": "6_p3_img1.png"
     },
     {
       "type": "single",
@@ -404,7 +404,7 @@ const tests = {
       ],
       "answer": 1,
       "page": 4,
-      "image": "assets/images/6_p3_img1.png"
+      "image": "6_p3_img1.png"
     },
     {
       "type": "single",
@@ -418,7 +418,7 @@ const tests = {
       ],
       "answer": 3,
       "page": 4,
-      "image": "assets/images/6_p3_img1.png"
+      "image": "6_p3_img1.png"
     },
     {
       "type": "matching",
@@ -977,7 +977,7 @@ const tests = {
       ],
       "answer": 2,
       "page": 3,
-      "image": "assets/images/8_p3_img1.png"
+      "image": "8_p3_img1.png"
     },
     {
       "type": "single",
@@ -991,7 +991,7 @@ const tests = {
       ],
       "answer": 2,
       "page": 3,
-      "image": "assets/images/8_p3_img2.png"
+      "image": "8_p3_img2.png"
     },
     {
       "type": "single",
@@ -1005,7 +1005,7 @@ const tests = {
       ],
       "answer": 1,
       "page": 3,
-      "image": "assets/images/8_p3_img2.png"
+      "image": "8_p3_img2.png"
     },
     {
       "type": "single",
@@ -1019,7 +1019,7 @@ const tests = {
       ],
       "answer": 2,
       "page": 4,
-      "image": "assets/images/8_p3_img2.png"
+      "image": "8_p3_img2.png"
     },
     {
       "type": "single",
@@ -1033,7 +1033,7 @@ const tests = {
       ],
       "answer": 1,
       "page": 4,
-      "image": "assets/images/8_p3_img2.png"
+      "image": "8_p3_img2.png"
     },
     {
       "type": "single",
@@ -1047,7 +1047,7 @@ const tests = {
       ],
       "answer": 3,
       "page": 4,
-      "image": "assets/images/8_p3_img2.png"
+      "image": "8_p3_img2.png"
     },
     {
       "type": "matching",
@@ -1259,7 +1259,7 @@ const tests = {
         4
       ],
       "page": 5,
-      "image": "assets/images/8_p5_img1.png"
+      "image": "8_p5_img1.png"
     }
   ],
   "variant12": [
@@ -1611,7 +1611,7 @@ const tests = {
       ],
       "answer": 1,
       "page": 3,
-      "image": "assets/images/12_p3_img1.png"
+      "image": "12_p3_img1.png"
     },
     {
       "type": "single",
@@ -1625,7 +1625,7 @@ const tests = {
       ],
       "answer": 1,
       "page": 3,
-      "image": "assets/images/12_p4_img1.png"
+      "image": "12_p4_img1.png"
     },
     {
       "type": "single",
@@ -1639,7 +1639,7 @@ const tests = {
       ],
       "answer": 2,
       "page": 3,
-      "image": "assets/images/12_p4_img1.png"
+      "image": "12_p4_img1.png"
     },
     {
       "type": "single",
@@ -1653,7 +1653,7 @@ const tests = {
       ],
       "answer": 1,
       "page": 3,
-      "image": "assets/images/12_p4_img1.png"
+      "image": "12_p4_img1.png"
     },
     {
       "type": "single",
@@ -1667,7 +1667,7 @@ const tests = {
       ],
       "answer": 3,
       "page": 3,
-      "image": "assets/images/12_p4_img1.png"
+      "image": "12_p4_img1.png"
     },
     {
       "type": "single",
@@ -1681,7 +1681,7 @@ const tests = {
       ],
       "answer": 0,
       "page": 4,
-      "image": "assets/images/12_p4_img1.png"
+      "image": "12_p4_img1.png"
     },
     {
       "type": "matching",
@@ -2245,7 +2245,7 @@ const tests = {
       ],
       "answer": 3,
       "page": 3,
-      "image": "assets/images/14_p3_img1.png"
+      "image": "14_p3_img1.png"
     },
     {
       "type": "single",
@@ -2259,7 +2259,7 @@ const tests = {
       ],
       "answer": 1,
       "page": 4,
-      "image": "assets/images/14_p3_img2.png"
+      "image": "14_p3_img2.png"
     },
     {
       "type": "single",
@@ -2273,7 +2273,7 @@ const tests = {
       ],
       "answer": 2,
       "page": 4,
-      "image": "assets/images/14_p3_img2.png"
+      "image": "14_p3_img2.png"
     },
     {
       "type": "single",
@@ -2287,7 +2287,7 @@ const tests = {
       ],
       "answer": 3,
       "page": 4,
-      "image": "assets/images/14_p3_img2.png"
+      "image": "14_p3_img2.png"
     },
     {
       "type": "single",
@@ -2301,7 +2301,7 @@ const tests = {
       ],
       "answer": 3,
       "page": 4,
-      "image": "assets/images/14_p3_img2.png"
+      "image": "14_p3_img2.png"
     },
     {
       "type": "single",
@@ -2315,7 +2315,7 @@ const tests = {
       ],
       "answer": 0,
       "page": 4,
-      "image": "assets/images/14_p3_img2.png"
+      "image": "14_p3_img2.png"
     },
     {
       "type": "matching",
@@ -2539,7 +2539,7 @@ const tests = {
         4
       ],
       "page": 5,
-      "image": "assets/images/14_p5_img1.png"
+      "image": "14_p5_img1.png"
     }
   ]
 };
