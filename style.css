@@ -774,3 +774,200 @@ input[type="text"]{
   background: rgba(255,255,255,0.8);
   border: 1px solid #e5e7eb;
 }
+.bot-hero{
+  display:grid;
+  grid-template-columns:1.4fr .9fr;
+  gap:20px;
+  align-items:stretch;
+  margin-top:12px;
+  margin-bottom:22px;
+}
+
+.bot-hero__content,
+.bot-side-card,
+.bot-main-card,
+.bot-tips-card{
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.75);
+  border-radius:24px;
+  box-shadow:
+    0 14px 34px rgba(16,24,40,.07),
+    inset 0 1px 0 rgba(255,255,255,.9);
+}
+
+.bot-hero__content{
+  padding:28px;
+}
+
+.bot-back{
+  display:inline-block;
+  margin-bottom:18px;
+}
+
+.bot-lead{
+  max-width:760px;
+}
+
+.bot-hero__chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:20px;
+}
+
+.bot-chip{
+  display:inline-flex;
+  align-items:center;
+  padding:10px 14px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#eef4ff,#f5f8ff);
+  border:1px solid #d8e4ff;
+  color:var(--brand);
+  font-weight:700;
+  font-size:14px;
+}
+
+.bot-side-card{
+  padding:24px;
+}
+
+.bot-list{
+  margin:0;
+  padding-left:18px;
+}
+
+.bot-list li{
+  margin-bottom:10px;
+  color:var(--text);
+}
+
+.bot-layout{
+  display:grid;
+  grid-template-columns:1.45fr .8fr;
+  gap:20px;
+  align-items:start;
+}
+
+.bot-main-card{
+  padding:24px;
+  min-height:560px;
+}
+
+.bot-main-card__top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.bot-widget-label{
+  margin:0 0 6px;
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--brand);
+  font-weight:800;
+}
+
+.bot-widget-title{
+  margin:0;
+  font-size:28px;
+}
+
+.bot-status{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 14px;
+  border-radius:999px;
+  background:#f0fdf4;
+  color:#166534;
+  border:1px solid #bbf7d0;
+  font-weight:700;
+  white-space:nowrap;
+}
+
+.bot-status__dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#22c55e;
+  box-shadow:0 0 0 6px rgba(34,197,94,.12);
+}
+
+.bot-widget-wrap{
+  min-height:430px;
+  border:1px solid #e7ebf3;
+  border-radius:20px;
+  padding:16px;
+  background:
+    linear-gradient(180deg, rgba(248,251,255,.9) 0%, rgba(255,255,255,.95) 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.75);
+}
+
+.bot-widget-wrap .elfsight-app-XXXX,
+.bot-widget-wrap [class*="elfsight-app"]{
+  min-height:380px;
+}
+
+.bot-tips-card{
+  padding:24px;
+}
+
+.bot-tip{
+  padding:14px 0;
+  border-bottom:1px solid #edf1f7;
+}
+
+.bot-tip:last-child{
+  border-bottom:none;
+}
+
+.bot-tip strong{
+  display:block;
+  margin-bottom:6px;
+  color:var(--brand2);
+}
+
+.bot-tip p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.6;
+}
+
+@media (max-width: 980px){
+  .bot-hero,
+  .bot-layout{
+    grid-template-columns:1fr;
+  }
+
+  .bot-main-card{
+    min-height:auto;
+  }
+}
+
+@media (max-width: 640px){
+  .bot-hero__content,
+  .bot-side-card,
+  .bot-main-card,
+  .bot-tips-card{
+    padding:18px;
+    border-radius:20px;
+  }
+
+  .bot-main-card__top{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .bot-widget-title{
+    font-size:24px;
+  }
+
+  .bot-chip{
+    font-size:13px;
+    padding:8px 12px;
+  }
+}
